@@ -119,6 +119,8 @@ RUN set -x && mkdir -p /opt/test; \
     openssl x509 -req -in /opt/test/server.csr -out /opt/test/server.crt -CA CA.crt -CAkey CA.key -CAcreateserial -days 365;
 
 COPY serverstart.sh ${INSTALLDIR_OPENSSL}/bin
+COPY client_server.sh ${INSTALLDIR_OPENSSL}/bin
+RUN chmod +x ${INSTALLDIR_OPENSSL}/bin/client_server.sh
 
 WORKDIR ${INSTALLDIR_OPENSSL}
 
@@ -130,6 +132,9 @@ WORKDIR /
 # Enable a normal user to create new server keys off set CA
 RUN addgroup -g 1000 -S oqs && adduser --uid 1000 -S oqs -G oqs && chown -R oqs.oqs /opt/test && chmod go+r ${INSTALLDIR_OPENSSL}/bin/CA.key 
 
+RUN apk add tmux
+
 #USER oqs
-CMD ["serverstart.sh"]
+#CMD ["serverstart.sh"]
+CMD ["client_server.sh"]
 STOPSIGNAL SIGTERM
