@@ -1,3 +1,12 @@
+## EDITED VERSION (USE THIS TO RUN CLIENT AND SERVER)
+
+1) Be sure to have [docker installed](https://docs.docker.com/install).
+2) Run `docker build -t oqs-ossl3 .` to create a post quantum-enabled OpenSSL3 image
+3) Start the container with `./run.sh` (in case of permission error do `chmod +x ./run.sh`)
+4) In the prompt command do `tmux a` (for other tmux command see the [cheatsheet](https://tmuxcheatsheet.com/))to see the output of client (top window) and server (bottom window). The output is saved in the files client.log and server.log in the current directory (it will be created by `run.sh` if absent)
+5) To exit the container use `Ctrl-d`
+
+
 This directory contains a Dockerfile that builds OpenSSL3 master with the [OQS provider](https://github.com/open-quantum-safe/oqs-provider), which allows openssl3 to use quantum-safe key exchange in TLS 1.3.
 
 ## Quick start
